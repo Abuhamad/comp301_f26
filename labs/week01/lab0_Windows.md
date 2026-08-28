@@ -130,13 +130,15 @@ New-Item -ItemType File -Path $config -Force | Out-Null
 notepad $config
 ```
 
-Paste an entry such as this, changing the values:
+Paste an entry such as this, replacing the values with your own lab information:
 
 ```sshconfig
 Host comp301
-    HostName 192.168.XXX.XXX
-    User {WRITE YOUR USERNAME}
+    HostName <LAB_SERVER_IP>
+    User <YOUR_USERNAME>
 ```
+
+Use the IP address provided by your instructor or lab instructions. Do not write a server IP directly into the shared course file.
 
 Save it, close Notepad, then test:
 
