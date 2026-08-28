@@ -134,7 +134,7 @@ Paste an entry such as this, changing the values:
 
 ```sshconfig
 Host comp301
-    HostName 192.168.101.200
+    HostName 192.168.XXX.XXX
     User {WRITE YOUR USERNAME}
 ```
 

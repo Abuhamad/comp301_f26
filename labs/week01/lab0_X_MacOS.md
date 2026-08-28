@@ -71,7 +71,7 @@ nano "$HOME/.ssh/config"
 Paste an entry such as this, changing the values:
 ```sh
 Host comp301
-    HostName 192.168.101.200
+    HostName 192.168.XXX.XXX
     User {WRITE YOUR USERNAME}
 ```
 
@@ -90,7 +90,7 @@ ssh comp301
 
 If the configuration is correct, this is equivalent to typing:
 
-ssh {WRITE YOUR USERNAME}@192.168.101.200
+ssh {WRITE YOUR USERNAME}@192.168.XXX.XXX
 
 ## 4. Copy files with SCP
 
