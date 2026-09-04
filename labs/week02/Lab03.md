@@ -12,7 +12,6 @@ By the end of this lab, you will be able to:
 
 ## Prerequisites
 
-- You must have SSH access to your assigned course VM.
 - `openssl` must be available on the VM (verify with `openssl version`; version 1.1.1 or later is expected).
 - No prior cryptography experience is assumed beyond what was covered in Lesson 5 (Advanced Encryption Standards: symmetric ciphers and block cipher modes).
 
