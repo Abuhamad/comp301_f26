@@ -16,11 +16,9 @@ By the end of this lab, you should be able to:
 * implement Rail Fence cipher encryption and decryption
 * test your code with sample inputs and verify the output
 
----
+## Part 1 — Caesar Cipher
 
-# Part 1 — Caesar Cipher
-
-## What is a Caesar Cipher?
+### What is a Caesar Cipher?
 
 The Caesar cipher is a substitution cipher where each letter in the plaintext is shifted forward by a fixed number of positions in the alphabet.
 
@@ -36,7 +34,7 @@ For example, with a shift of 3:
 
 This is called a substitution cipher because letters are replaced by other letters based on a pattern.
 
-## Example
+### Caesar Cipher Example
 
 Plaintext:
 
@@ -52,7 +50,7 @@ Ciphertext:
 KHOOR
 ```
 
-## Your Task
+### Caesar Cipher Task
 
 Write a Python program that implements the following functions:
 
@@ -65,14 +63,14 @@ def caesar_decrypt(ciphertext, shift):
     pass
 ```
 
-### Requirements
+#### Caesar Cipher Requirements
 
 * Keep only alphabetic characters.
 * Preserve the original letter case (uppercase stays uppercase, lowercase stays lowercase).
 * Ignore spaces and punctuation when encrypting/decrypting.
 * Use a wraparound alphabet, so letters continue from Z to A and from z to a.
 
-### Example Input and Output
+#### Caesar Cipher Example Input and Output
 
 ```python
 print(caesar_encrypt("HELLO WORLD", 3))
@@ -82,23 +80,21 @@ print(caesar_decrypt("KHOOR ZRUOG", 3))
 # Output: HELLO WORLD
 ```
 
-### Challenge Questions
+#### Caesar Cipher Challenge Questions
 
 1. What happens if the shift value is larger than 26?
 2. How can you normalize the shift so it always stays within the alphabet size?
 3. Why is the Caesar cipher easy to break?
 
----
+## Part 2 — Rail Fence Cipher
 
-# Part 2 — Rail Fence Cipher
-
-## What is a Rail Fence Cipher?
+### What is a Rail Fence Cipher?
 
 The Rail Fence cipher is a transposition cipher. Instead of replacing letters with other letters, it rearranges the order of the letters.
 
 The message is written in rows, like a fence, and then read row by row.
 
-## Example
+#### Rail Fence Example
 
 Plaintext:
 
@@ -122,7 +118,7 @@ Ciphertext:
 WECRLTEERDSOEEFEAOCAIVDEN
 ```
 
-## Your Task
+#### Rail Fence Cipher Task
 
 Write a Python program that implements the following functions:
 
@@ -135,14 +131,14 @@ def rail_fence_decrypt(ciphertext, rails):
     pass
 ```
 
-### Requirements
+#### Rail Fence Cipher Requirements
 
 * The function should accept a plaintext string and the number of rails.
 * The encryption should arrange the text in zig-zag order.
 * The decryption should recover the original text from the encrypted form.
 * Spaces may be kept or removed depending on your design, but be consistent.
 
-### Example Input and Output
+#### Example Input and Output
 
 ```python
 print(rail_fence_encrypt("WEAREDISCOVEREDFLEEATONCE", 3))
@@ -152,15 +148,13 @@ print(rail_fence_decrypt("WECRLTEERDSOEEFEAOCAIVDEN", 3))
 # Output: WEAREDISCOVEREDFLEEATONCE
 ```
 
-### Challenge Questions
+#### Rail Fence Cipher Challenge Questions
 
 1. Why is this considered a transposition cipher instead of a substitution cipher?
 2. What happens when the number of rails is 1 or 2?
 3. Why is the Rail Fence cipher still vulnerable to cryptanalysis?
 
----
-
-# Assignment
+## Assignment
 
 Create a Python file named:
 
@@ -189,9 +183,9 @@ def rail_fence_decrypt(ciphertext, rails):
 
 Then write a small test section that demonstrates each cipher.
 
-## Required Test Cases
+### Required Test Cases
 
-### Caesar Cipher Tests
+#### Caesar Cipher Tests
 
 ```python
 print(caesar_encrypt("ATTACK AT DAWN", 5))
@@ -200,7 +194,7 @@ print(caesar_encrypt("COMP301", 7))
 print(caesar_decrypt(caesar_encrypt("COMP301", 7), 7))
 ```
 
-### Rail Fence Tests
+#### Rail Fence Tests
 
 ```python
 print(rail_fence_encrypt("HELLO WORLD", 3))
@@ -211,18 +205,13 @@ print(rail_fence_decrypt(rail_fence_encrypt("SECRETSHARED", 4), 4))
 
 Your output should be clearly readable and your code should be well organized.
 
----
-
-# Submission Guidelines
+## Submission Guidelines
 
 Submit the following:
 
 1. Your Python source file: `lab02.py`
 
-
----
-
-# Bonus Challenge
+## Bonus Challenge
 
 If you finish early, try this extension:
 
@@ -230,9 +219,7 @@ If you finish early, try this extension:
 * Allow the user to enter their own message and shift/rail count.
 * Add a function to detect whether the input is valid for a chosen cipher.
 
----
-
-# What You Learned
+## What You Learned
 
 In this lab, you explored:
 

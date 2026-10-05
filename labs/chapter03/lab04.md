@@ -9,14 +9,12 @@ By the end of this lab, you will be able to:
 3. Generate key pair.
 4. Use asymmetric cryptography to establish a shared AES key and then use that AES key to encrypt a message with a block cipher mode of operation (reusing the AES modes from Lab 03).
 
-
 ## Prerequisites
 
 - Completion of Lab 03 (Symmetric Encryption with OpenSSH / AES), this lab builds directly on the `openssl enc` and AES-mode commands used there.
 - SSH access to your assigned course VM.
 
-
-## Before you start:
+## Before you start
 
 ### Know there are two different problems
 
@@ -34,8 +32,8 @@ OpenSSH does not use RSA encryption to exchange the session key. It uses a **key
 ### Set-up and Implementation
 
 - On the VM, create a folder for this lab on the class folder on home directory.
-    - create folder: `mkdir ~/comp301/lab04`
-    - Go to folder `cd ~/comp301/lab04`
+  - create folder: `mkdir ~/comp301/lab04`
+  - Go to folder `cd ~/comp301/lab04`
 
 ## Part 1: Key Generation
 
@@ -55,7 +53,7 @@ Now list the key-exchange algorithms OpenSSH offers to establish the session's s
 ssh -Q kex
 ```
 
-You should see entries such as: `curve25519-sha256`, `ecdh-sha2-nistp256`, `ecdh-sha2-nistp384`, `ecdh-sha2-nistp521`, and `diffie-hellman-group14-sha256`. 
+You should see entries such as: `curve25519-sha256`, `ecdh-sha2-nistp256`, `ecdh-sha2-nistp384`, `ecdh-sha2-nistp521`, and `diffie-hellman-group14-sha256`.
 
 > Read `ecdh-sha2-nistp256` as: ECDH key agreement, on the NIST P-256 curve, with SHA-256 used to hash the result into a session key.
 
@@ -66,7 +64,9 @@ ssh-keygen -t rsa -b 2048 -f rsa_id -N ""
 ssh-keygen -t ecdsa -b 256 -f ecdsa_id -N ""
 ssh-keygen -t ed25519 -f ed25519_id -N ""
 ```
+
 Then
+
 ```bash
 ssh-keygen -l -f rsa_id.pub
 ssh-keygen -l -f ecdsa_id.pub
@@ -117,30 +117,34 @@ These SSH keypairs are for your own inspection in this part only — they are us
 
 5. Now use the AES key you just exchanged to encrypt a message, choosing one block cipher mode of operation (as in Lab 03):
 
-    * Generate the AES Key and IV
+    - Generate the AES Key and IV
+
         ```bash
         KEY_HEX=$(xxd -p aes_key.bin | tr -d '\n')
         IV_HEX=$(openssl rand -hex 16)
         ```
-    * Write a message to `plaintext.txt`
+
+    - Write a message to `plaintext.txt`
 
         ```bash
         echo "This is my COMP301 Lab 04 message (RSA track)." > plaintext.txt
         ```
 
-    * Encrypt the message:
+    - Encrypt the message:
 
         ```bash
         openssl enc -aes-256-ctr -in plaintext.txt -out ciphertext.enc -K "$KEY_HEX" -iv "$IV_HEX"
         ```
 
 6. Verify round trip
+
     ```bash
     openssl enc -aes-256-ctr -d -in ciphertext.enc -out recovered.txt -K "$KEY_HEX" -iv "$IV_HEX"
     diff plaintext.txt recovered.txt
     ```
 
 7. Record `$KEY_HEX` and `$IV_HEX`, you will need them for your README.
+
     ```bash
     echo $KEY_HEX > aes_key.bin
 
@@ -170,7 +174,9 @@ This track simulates two parties (**Alice** and **Bob**) independently deriving 
 
     openssl pkeyutl -derive -inkey bob_private.pem -peerkey alice_public.pem -out bob_shared.bin
     ```
+
     You can check the difference of the shared key
+
     ```bash
     diff alice_shared.bin bob_shared.bin
     ```
@@ -199,7 +205,8 @@ This track simulates two parties (**Alice** and **Bob**) independently deriving 
     diff plaintext_ecc.txt recovered_ecc.txt
     ```
 
-6. Record `$KEY_HEX` and `$IV_HEX` — you will need them for your README.
+4. Record `$KEY_HEX` and `$IV_HEX` — you will need them for your README.
+
     ```bash
     echo $KEY_HEX > aes_key_ecc.bin
     echo $IV_HEX > aes_iv_ecc.bin
@@ -208,14 +215,13 @@ This track simulates two parties (**Alice** and **Bob**) independently deriving 
 ## Assignment
 
 1. Complete Parts 1, 2, and 3.
-6. Write a `README.md` stating:
+2. Write a `README.md` stating:
    - What have you completed in parts 1, 2, and 3.
    - Write the files names associated with each part.
 
 ## Submission
 
 Create the submission folder on the VM and make sure that your deliverables are there. It should be in `~/comp301/lab04/`.
-
 
 ## Useful References and Resources
 

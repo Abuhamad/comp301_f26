@@ -1,9 +1,7 @@
-<!-- lab-latest.md mirrors lab-v1.md -->
-
 # 05 — Trust PK Infrastructure — Lab
 
-
 ## Objectives
+
 By the end of this lab, you will be able to:
 
 1. Diagram the components of a PKI and state the purpose of each role by inspecting a live certificate's fields.
@@ -11,6 +9,7 @@ By the end of this lab, you will be able to:
 3. Locate the CRL Distribution Points and OCSP responder fields in a certificate and choose CRL or OCSP for a stated revocation-checking requirement with justification.
 
 ## Prerequisites
+
 - A Unix-like shell (macOS Terminal or Linux) with `openssl` available (OpenSSL 1.1 or newer recommended).
 - Network access to fetch an HTTPS site's certificate chain.
 - Optional: a modern browser with a certificate viewer for a visual inspection.
@@ -25,10 +24,11 @@ This lab turns the lecture concepts into observable artifacts by fetching a live
 ### Set-up and Implementation
 
 - On the VM, create a folder for this lab on the class folder on home directory.
-    - create folder: `mkdir ~/comp301/lab05`
-    - Go to folder `cd ~/comp301/lab05`
+  - create folder: `mkdir ~/comp301/lab05`
+  - Go to folder `cd ~/comp301/lab05`
 
-## Part 1 — Setup 
+## Part 1 — Setup
+
 Open a terminal. Use a temporary directory for artifacts. Set a target host to inspect. Replace `TARGET` with your chosen HTTPS host if desired.
 
 ```sh
@@ -38,6 +38,7 @@ echo "using tmpdir: $TMPDIR"
 ```
 
 ## Part 2 — Fetch and save the chain
+
 Retrieve the certificate chain from the target and save it to a file.
 
 ```sh
@@ -63,7 +64,7 @@ PY
 ls -l $TMPDIR
 ```
 
-## Part 3 — Read the leaf certificate 
+## Part 3 — Read the leaf certificate
 
 Display the leaf certificate's key fields and record them.
 
@@ -88,7 +89,7 @@ done
 
 Confirm that the final certificate in the chain is self-signed (subject equals issuer) for a root CA.
 
-## Part 5 — Revocation check 
+## Part 5 — Revocation check
 
 Locate CRL Distribution Points and the OCSP responder in the leaf certificate.
 
@@ -99,9 +100,11 @@ openssl x509 -in $TMPDIR/cert-01.pem -noout -text | egrep -n "CRL Distribution P
 Pick which mechanism a client should use given one of these scenarios: offline client with intermittent network, or always-online client requiring fresh status. State your choice and one reason.
 
 ## Assignment
+
 - Create a `submission.txt` file with the following entries: `leaf-subject: <value>`, `leaf-issuer: <value>`, `public-key-alg: <value>`, `serial: <value>`, `valid-from: <value>`, `valid-until: <value>`, `chain.txt: <list of issuer->subject lines>`, `crl: <CRL URL or none>`, `ocsp: <OCSP URL or none>`, `revocation-choice: <CRL or OCSP>`, `revocation-justify: <one-sentence justification>`.
 
 ## Submission
+
 - Place `submission.txt` in this lab folder (`~/comp301/lab05`) and name the file exactly `submission.txt`.
 
 ## Verification / Completion Criteria
@@ -115,6 +118,7 @@ Pick which mechanism a client should use given one of these scenarios: offline c
 - `submission.txt` contains the `revocation-choice` and a one-sentence `revocation-justify` that references the tradeoff (freshness vs availability) for the chosen mechanism.
 
 ## Useful References and Resources
+
 - RFC 5280 — Internet X.509 Public Key Infrastructure Certificate and CRL Profile.
 - OpenSSL `s_client` and `x509` man pages for certificate retrieval and display.
 - Let's Encrypt documentation on certificate chains and chain building.

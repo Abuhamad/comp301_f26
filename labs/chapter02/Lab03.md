@@ -26,7 +26,7 @@ Symmetric encryption uses the **same key** to encrypt and decrypt data. AES (Adv
 A block cipher only defines how to scramble a single 16-byte block. A **mode of operation** defines how to chain many blocks together to encrypt a message of arbitrary length. The mode you choose affects security properties (does an identical plaintext block always produce an identical ciphertext block?), whether an IV is required, and whether encryption can be parallelized.
 
 | Mode | Name | IV required? | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | ECB | Electronic Codebook | No | Encrypts each block independently. Identical plaintext blocks produce identical ciphertext blocks — patterns leak through. **Never use for real data.** |
 | CBC | Cipher Block Chaining | Yes | Each plaintext block is XORed with the previous ciphertext block before encryption. Sequential — cannot be parallelized. |
 | CFB | Cipher Feedback | Yes | Turns the block cipher into a self-synchronizing stream cipher. |
