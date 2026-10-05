@@ -39,46 +39,46 @@ The course meets in person and provides an introductory survey of computer secur
 
 ## Course Design Overview
 
-### Week 1: Introduction to Security
+### Chapter 1: Introduction to Security
 - Security principles, vulnerabilities, threat actors, attack vectors, social engineering, malware, and security control types
 
-### Week 2: Cryptography
+### Chapter 2: Cryptography
 - Cryptographic principles, historical cryptosystems, symmetric/asymmetric encryption, hash functions, MACs, signatures, and digital certificates
 
-### Week 3: Identity and Access Management
+### Chapter 3: Identity and Access Management
 - Authentication, IAM protocols, accounts, access control models, and filesystem permissions
 
-### Week 4: Network Attacks and Secure Network Protocols
+### Chapter 4: Network Attacks and Secure Network Protocols
 - DDoS, DNS issues, ARP poisoning, MITM, HTTPS, SSH, and IPSec
 
-### Week 5: Secure Network Design
+### Chapter 5: Secure Network Design
 - Segmentation, firewalls, IDS/IPS, VPNs, port security, and load balancing
 
-### Week 6: Wireless, Mobile, and IoT Security
+### Chapter 6: Wireless, Mobile, and IoT Security
 - WLAN standards, Bluetooth security, embedded systems, and mobile device security
 
-### Week 7: Application Attacks
+### Chapter 7: Application Attacks
 - XSS, CSRF, SSRF, memory vulnerabilities, injection attacks, race conditions, and privilege escalation
 
-### Week 8: Secure Application Development
+### Chapter 8: Secure Application Development
 - Secure coding, version control, code review, fuzzing, OWASP, and input validation
 
-### Week 9: Endpoint Security
+### Chapter 9: Endpoint Security
 - Endpoint protection, DLP, hardening, patch management, and boot integrity
 
-### Week 10: Cloud Security
+### Chapter 10: Cloud Security
 - Cloud deployment models, containers, virtualization, SDN, storage, and cloud controls
 
-### Week 11: Cybersecurity Resilience and Security Assessment
+### Chapter 11: Cybersecurity Resilience and Security Assessment
 - Data protection, redundancy, vulnerability scans, event management, and penetration testing
 
-### Week 12: Digital Forensics and Incident Response
+### Chapter 12: Digital Forensics and Incident Response
 - IR development, containment, digital evidence, and forensic investigation
 
-### Week 13: Security Standards and Policies
+### Chapter 13: Security Standards and Policies
 - Regulations, standards, frameworks, documentation, and personnel training
 
-### Week 14: Risk Management and Privacy
+### Chapter 14: Risk Management and Privacy
 - Privacy breaches, data classification, risk management, and business continuity
 
 ## Notes
