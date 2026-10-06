@@ -1,4 +1,4 @@
-# `CHAP`ter 04: Identity and Access Management
+# Chapter 04: Identity and Access Management
 
 ## Abstract
 
