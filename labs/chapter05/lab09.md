@@ -12,7 +12,7 @@ By the end of this lab, you will be able to:
 
 - SSH access to your assigned course VM (Linux). No administrator rights are required: Part 4 demonstrates the hosts file attack inside a private mount namespace, and Part 1 notes an alternate path if the DNS tools are missing.
 - The `dig` and `delv` command-line tools, installed by the `dnsutils` package on Debian/Ubuntu. Part 1 verifies both tools and installs the package if needed.
-- Internet access from the VM, including outbound UDP and TCP port 53, so `dig +trace` can contact the root, TLD, and authoritative servers directly. If the VM's network blocks outbound port 53 (a query such as `dig @ns1.google.com google.com` times out), run Parts 2 and 3 on your local machine instead: macOS and Linux both ship with `dig`, and Part 2 includes a resolver-mediated fallback that works on a restricted network.
+- Internet access from the VM. The course VM's network blocks outbound UDP and TCP port 53 to external DNS servers (a query such as `dig @ns1.google.com google.com` times out), so Part 2 provides a resolver-mediated fallback that works on the restricted network, and the `dig +trace` walkthrough is marked for use on a local machine or any unrestricted network.
 - Chapter 5 lecture, Section 2: DNS, DNS resolution, DNS zones, authoritative name servers, domain reputation, URL redirection, DNS poisoning, and DNSSEC.
 
 ## Before you start
@@ -23,8 +23,8 @@ By the end of this lab, you will be able to:
 
 | Concept from the lecture | Where you observe it in this lab |
 | --- | --- |
-| Hierarchical resolution and referrals | Part 2: `dig +trace google.com` walks root to .com to *google.com* |
-| Authoritative name server | Part 2: querying *ns1.google.com* directly returns the `aa` flag |
+| Hierarchical resolution and referrals | Part 2: `dig +trace google.com` walks root to .com to *google.com* (Option 1, local machine), or the `dig NS` zone walk lists the same three server sets (Option 2, VM) |
+| Authoritative name server | Part 2 Option 1 (local machine): querying *ns1.google.com* directly returns the `aa` flag |
 | DNSSEC data origin authentication and integrity | Part 3: `dig +dnssec` shows RRSIG signatures, `delv` validates them |
 | DNSSEC discarding invalid data | Part 3: `dnssec-failed.org` returns SERVFAIL, but succeeds with checking disabled |
 | URL redirection through the hosts file | Part 4: a fake `/etc/hosts` entry overrides real DNS for system tools |
@@ -110,7 +110,7 @@ The three outputs list the root servers, the `.com` servers, and the *google.com
 > ```bash
 > echo "baseline-ip: $(dig google.com +short | head -1)" >> submission.txt
 > echo "trace-root-server: $(dig NS . +short | paste -sd, - | sed 's/,/, /g')" >> submission.txt
-> echo "trace-tld-server: $(dig NS com. +short |paste -sd, - | sed 's/,/, /g')" >> submission.txt
+> echo "trace-tld-server: $(dig NS com. +short | paste -sd, - | sed 's/,/, /g')" >> submission.txt
 > echo "trace-authoritative: $(dig NS google.com. +short | paste -sd, - | sed 's/,/, /g')" >> submission.txt
 > ```
 >
@@ -213,7 +213,7 @@ The first request reaches the real site and prints a success code such as 200. T
 ```bash
 cp /etc/hosts myhosts
 echo "127.0.0.1 example.com www.example.com" >> myhosts
-unshare -rm bash -c 'mount --bind "$HOME/mo/myhosts" /etc/hosts && \
+unshare -rm bash -c 'mount --bind "$HOME/comp301/lab09/myhosts" /etc/hosts && \
   echo "-- inside the namespace --" && \
   getent hosts example.com && \
   ping -c 1 example.com; \
@@ -265,16 +265,6 @@ Create a `submission.txt` file with the following entries:
 
 - Place `submission.txt` in this lab folder (`~/comp301/lab09`) and name the file exactly `submission.txt`.
 
-## Verification / Completion Criteria
-
-- The Part 2 zone walk (`dig NS . +short`, `dig NS com. +short`, `dig NS google.com. +short`) lists the root, `.com`, and *google.com* server sets through the VM's resolver. On an unrestricted network, `dig +trace google.com` additionally shows the three referrals live, ending with an A record.
-- On the VM, `dig @ns1.google.com google.com` times out because the network filters outbound port 53, and the fallback zone walk supplies the server names recorded in the Assignment. On an unrestricted network (or with `+tcp` where only UDP is filtered), the direct query answers with the `aa` flag set and no `ra` flag.
-- `dig +dnssec google.com @<upstream>` shows no RRSIG record, `dig +dnssec cloudflare.com @<upstream>` shows an RRSIG record, and `delv @<upstream> cloudflare.com` reports `; fully validated`.
-- `curl -s 'https://dns.google/resolve?name=dnssec-failed.org&type=A&do=1'` returns `"Status": 2` (SERVFAIL), and the same request with `cd=1` returns `"Status": 0` (NOERROR).
-- During Part 4, the `--resolve` request failed with a connection error while the plain request succeeded, and inside the namespace `ping example.com` used 127.0.0.1 while `dig example.com +short` returned the real public IP at the same time.
-- After exiting the namespace, `getent hosts example.com` shows the real public IP, and `grep example.com /etc/hosts` returns nothing because the system file was never modified.
-- `submission.txt` contains every field listed in the Assignment, with values consistent with the outputs above.
-
 ## Useful References and Resources
 
 - `man dig` and `man delv` — the full option lists, including `+trace`, `+dnssec`, `+cd`, and `+short`.
@@ -286,5 +276,5 @@ Create a `submission.txt` file with the following entries:
 
 ## Optional Challenges
 
-- Run `delv dnssec-failed.org` and read the validation failure chain line by line, identifying which signature check fails first.
+- Run `delv @<upstream> dnssec-failed.org` and read the validation failure chain line by line, identifying which signature check fails first.
 - Query a DoH resolver from the lecture's table with `curl -sH 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=google.com&type=A'` and compare the JSON answer with the `dig +short` answer from Part 1.
