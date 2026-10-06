@@ -105,6 +105,8 @@ dig NS google.com. +short
 
 The three outputs list the root servers, the `.com` servers, and the *google.com* authoritative servers, the same three stages as `+trace`, though the resolver does the walking and the `aa` flag cannot appear in a recursive answer. **Record these server names for the Assignment**.
 
+> **\[NOTE\]**
+>
 > For example, you can use `echo` with command substitution to write a field directly to `submission.txt` as follows:
 >
 > ```bash
@@ -139,6 +141,7 @@ dig +dnssec google.com @<upstream> | grep -c RRSIG
 ```
 
 > **\[NOTE\]**
+>
 > You can save the `<upstream>` IP in a shell variable to use it later:
 >
 > ```bash
