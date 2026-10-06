@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This `CHAP`ter covers identity and access management (IAM), the framework of technologies and policies that identifies users, authenticates their claimed identities, and authorizes their access to system resources. The `CHAP`ter describes the five authentication factors, one-time passwords, hardware-based security modules, and biometric systems with their error metrics. The `CHAP`ter then examines the major authentication protocols: `PAP`, `CHAP`, Kerberos, `EAP` with IEEE 802.1X, RADIUS, TACACS+, and the Internet standards SAML, OpenID, and OAuth. The `CHAP`ter closes with account policies and controls and the five access control models: DAC, MAC, RBAC, ABAC, and rule-based access control.
+This chapter covers identity and access management (IAM), the framework of technologies and policies that identifies users, authenticates their claimed identities, and authorizes their access to system resources. The chapter describes the five authentication factors, one-time passwords, hardware-based security modules, and biometric systems with their error metrics. The chapter then examines the major authentication protocols: `PAP`, `CHAP`, Kerberos, `EAP` with IEEE 802.1X, RADIUS, TACACS+, and the Internet standards SAML, OpenID, and OAuth. The chapter closes with account policies and controls and the five access control models: DAC, MAC, RBAC, ABAC, and rule-based access control.
 
 ## Objectives
 
@@ -40,7 +40,7 @@ Identity proofing is the process of verifying a user's identity during account c
 
 #### **Authentication**
 
-Authentication is the act of verifying a user's claim to an identity. A user proves a claim by presenting evidence such as possession of a device, presence at a location, or knowledge of a password or PIN. These evidence types are called authentication factors. The user and the system exchange authentication information through an authentication protocol, a communications protocol designed for securely transferring authentication information between two parties. Authentication protocols covered in this `CHAP`ter include `PAP`, `CHAP`, Kerberos, EAP, IEEE 802.1X, RADIUS, and TACACS+.
+Authentication is the act of verifying a user's claim to an identity. A user proves a claim by presenting evidence such as possession of a device, presence at a location, or knowledge of a password or PIN. These evidence types are called authentication factors. The user and the system exchange authentication information through an authentication protocol, a communications protocol designed for securely transferring authentication information between two parties. Authentication protocols covered in this chapter include `PAP`, `CHAP`, Kerberos, EAP, IEEE 802.1X, RADIUS, and TACACS+.
 
 #### **Authorization**
 
@@ -834,7 +834,7 @@ Conditional access commonly enforces security policies. A system that supports c
 
 ## Summary
 
-This `CHAP`ter defined identity and access management through its three objectives: identification, authentication, and authorization. The `CHAP`ter described the five authentication factors, one-time passwords (TOTP and HOTP), hardware security through TPM, HSM, and secure enclaves, and biometric authentication with the FRR, FAR, and CER error metrics. The `CHAP`ter examined the authentication protocols `PAP`, `CHAP`, Kerberos, `EAP` with IEEE 802.1X, RADIUS, and TACACS+, and the Internet standards SAML, OpenID, and OAuth. The `CHAP`ter closed with account policies, password storage through hashing, salting, and slow KDFs, account types, account controls and maintenance, the five access control models (DAC, MAC, RBAC, ABAC, and rule-based), filesystem permissions, privileged access management, and conditional access.
+This chapter defined identity and access management through its three objectives: identification, authentication, and authorization. The chapter described the five authentication factors, one-time passwords (TOTP and HOTP), hardware security through TPM, HSM, and secure enclaves, and biometric authentication with the FRR, FAR, and CER error metrics. The chapter examined the authentication protocols `PAP`, `CHAP`, Kerberos, `EAP` with IEEE 802.1X, RADIUS, and TACACS+, and the Internet standards SAML, OpenID, and OAuth. The chapter closed with account policies, password storage through hashing, salting, and slow KDFs, account types, account controls and maintenance, the five access control models (DAC, MAC, RBAC, ABAC, and rule-based), filesystem permissions, privileged access management, and conditional access.
 
 ## Useful References and Resources
 
