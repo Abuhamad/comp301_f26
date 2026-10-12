@@ -378,8 +378,10 @@ sequenceDiagram
     W->>S: Connect to TCP 443
     S->>W: Server X.509 certificate
     W->>W: Validate certificate chain
-    W<->>S: TLS handshake, session keys established
-    W<->>S: Encrypted HTTP requests and responses
+    W->>S: TLS handshake (ClientHello)
+    S->>W: TLS handshake (ServerHello), session keys established
+    W->>S: Encrypted HTTP request
+    S->>W: Encrypted HTTP response
 ```
 
 #### **DNS over HTTPS (DoH)**
