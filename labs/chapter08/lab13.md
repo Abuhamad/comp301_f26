@@ -83,16 +83,16 @@ gcc -g -fno-stack-protector -o bof2 bof.c
 echo $?
 ```
 
-The unprotected build crashes with a segmentation fault. Inspect the crash:
+The unprotected build crashes with a segmentation fault. Inspect the crash by handing gdb the same 64-byte argument, generated on the shell before gdb starts:
 
 ```bash
-gdb -q ./bof2
+gdb -q --args ./bof2 $(python3 -c "print('A' * 64)")
 ```
 
 At the gdb prompt:
 
 ```gdb
-run $(python3 -c "print('A' * 64)")
+run
 info registers rip
 quit
 ```

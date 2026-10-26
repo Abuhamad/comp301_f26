@@ -140,13 +140,19 @@ The `%27` is a URL-encoded single quote. The database receives:
 SELECT * FROM users WHERE name='alice'--' AND pw='x'
 ```
 
-Everything after `--` is a comment, so the password check disappears and alice's row matches. The answer is `welcome` even though the password `x` is wrong. Try the classic disjunction as well:
+Everything after `--` is a comment, so the password check disappears and alice's row matches. The answer is `welcome` even though the password `x` is wrong. Try the classic disjunction, which also needs a trailing comment because `AND` binds tighter than `OR`:
 
 ```bash
-curl -s "http://127.0.0.1:8300/login?u=%27%20OR%20%271%27=%271&p=x"
+curl -s "http://127.0.0.1:8300/login?u=%27%20OR%20%271%27=%271%27--&p=x"
 ```
 
-Record both responses.
+The payload decodes to `' OR '1'='1'--`, and the database receives:
+
+```sql
+SELECT * FROM users WHERE name='' OR '1'='1'--' AND pw='x'
+```
+
+The disjunction matches every row. Without the trailing `--`, the `AND pw='x'` clause still applies to the right side of the `OR` and the attack fails, which is worth demonstrating if a student omits the comment. Record both responses.
 
 ## Part 3: UNION extraction
 

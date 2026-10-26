@@ -210,6 +210,8 @@ The legitimate transfer succeeds with the token. Record both balance values.
 
 Start two more applications in separate terminals. The internal service binds localhost only:
 
+Open a third SSH session in `~/comp301/lab11`:
+
 ```bash
 cat > internal.py << 'PYEOF'
 #!/usr/bin/env python3
@@ -288,15 +290,19 @@ class H(BaseHTTPRequestHandler):
 print("Listening on http://127.0.0.1:8201")
 HTTPServer(("127.0.0.1", 8201), H).serve_forever()
 PYEOF
+```
 
-python3 internal.py   # terminal 3
-python3 fetcher.py    # terminal 4
+Start the internal service in the third session and the fetcher in a fourth SSH session:
+
+```bash
+python3 internal.py   # third session
+python3 fetcher.py    # fourth session
 ```
 
 From a free terminal, ask the fetcher for a public page, then for the internal service:
 
 ```bash
-curl -s 'http://127.0.0.1:8201/fetch?url=http://neverssl.com/' | head -3
+curl -s --max-time 20 'http://127.0.0.1:8201/fetch?url=http://neverssl.com/' | head -3
 curl -s 'http://127.0.0.1:8201/fetch?url=http://127.0.0.1:8999/'
 ```
 
@@ -306,10 +312,10 @@ Apply the allow-list defense:
 
 ```bash
 curl -s 'http://127.0.0.1:8201/fetch2?url=http://127.0.0.1:8999/'
-curl -s 'http://127.0.0.1:8201/fetch2?url=http://neverssl.com/' | head -3
+curl -s --max-time 20 'http://127.0.0.1:8201/fetch2?url=http://neverssl.com/' | head -3
 ```
 
-The internal destination is refused, and the allowed destination still works.
+The internal destination is refused, and the allowed destination still works. If the public fetch times out on a restricted network, the internal demonstration still stands on its own, and you can substitute any reachable site in `ALLOWED`.
 
 Stop all three servers with `Ctrl+C` when you finish.
 
